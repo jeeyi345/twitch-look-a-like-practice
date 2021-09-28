@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+            border-bottom: 1px solid black;
+            background-color: white;
+            z-index: 1;
+        }
+
+        .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .left-links {
+            display: flex;
+        }
+
+        .ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        .icon {
+            background-image: url("./../img/twitch-icon.png");
+            background-size: cover;
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+        }
+
+        .left-links li,
+        .right-links li {
+            display: block;
+            margin: 0 10px;
+        }
+
+        a {
+            text-decoration-line: none;
+            color: black;
+        }
+
+        .mid {
+            /* background-color: turquoise; */
+            display: flex;
+            /* width: 33%; */
+        }
+
+        .search-input {
+            width: 340px;
+            height: 35px;
+            margin-right: 3px;
+            border-radius: 5px 0 0 5px;
+            background-color: lightgray;
+            outline: none;
+            border: 0px
+        }
+
+        .search-btn {
+            background-image: url("./../img/search-icon.png");
+            background-color: lightgray;
+            background-size: cover;
+            width: 35px;
+            height: 35px;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .right {
+            display: flex;
+            align-items: center;
+        }
+
+        .right-links {
+            display: flex;
+        }
+
+        .right-links li {
+            width: 40px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .login {
+            background-color: lightgray;
+        }
+
+        .sign_up {
+            background-color: blueviolet;
+        }
+
+        .sign_up a {
+            color: white;
+        }
+
+        .user-icon {
+            background-image: url("./../img/person.png");
+            width: 35px;
+            height: 35px;
+            background-size: cover;
+            margin-right: 10px;
+        }
+
+        /* --------- */
+        aside {
+            width: 50px;
+            background-color: lightgray;
+            height: calc(100vh - 50px);
+            position: fixed;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .following-group {
+            /* margin-top: 5px; */
+        }
+
+        .following {
+            background-color: lightseagreen;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            margin: 10px 0;
+        }
+
+        /* --------- */
+        .container {
+            padding: 40px 30px
+        }
+
+        main {
+            margin: 50px 0 0 50px;
+        }
+
+        .gaming-description {
+            color: grey;
+            font-size: 20px;
+        }
+
+        .gaming .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 6px;
+
+        }
+
+        .gaming .col {
+            min-width: 317px;
+        }
+
+        .game-card {
+            height: 70px;
+            padding: 10px;
+            background-color: lightgrey;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            border-radius: 5px;
+        }
+
+        .game-img {
+            width: 50px;
+            height: 50px;
+            background-color: pink;
+        }
+
+        .game-info {
+            width: 225px;
+        }
+
+        .viewers {
+            color: dimgray;
+        }
+
+        .game-card .live-block {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        .live {
+            align-self: flex-start;
+            background-color: red;
+            color: white;
+            padding: 3px;
+            border-radius: 5px;
+
+        }
+
+        /* ------------- */
+        .streaming-description {
+            color: grey;
+            font-size: 16px;
+            position: relative;
+        }
+
+        .stream-block {
+            display: flex;
+        }
+
+        .highlight {
+            width: 33.33%;
+            padding: 0 10px;
+        }
+
+        .highlight .thumbnail {
+            height: 330px;
+        }
+
+        .thumbnail {
+            background-color: teal;
+            position: relative;
+            width: 100%;
+        }
+
+        .thumbnail .live {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .thumbnail .viewers {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 0 3px;
+            border-radius: 3px;
+            font-size: 15px;
+        }
+
+        .stream-block .row {
+            width: 66.67%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .stream-group {
+            font-size: 15px;
+        }
+
+        .streamer {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .avatar {
+            width: 20px;
+            height: 20px;
+            background-color: turquoise;
+            border-radius: 50%;
+        }
+
+        .streamer-id {
+            padding: 0 5px;
+        }
+
+        .stream-title {
+            width: 100%;
+            margin-top: 5px;
+
+            /* 讓文字縮減到 ... */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .stream-game {
+            margin-top: 5px;
+            color: dimgrey;
+        }
+
+        .stream-block .col {
+            width: 25%;
+            padding: 0 10px;
+        }
+
+        .stream-group .thumbnail {
+            height: 160px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- nav, search bar -->
+    <header>
+        <div class="left">
+            <div class="icon"></div>
+            <ul class="left-links">
+                <li><a href="">瀏覽</a></li>
+                <li><a href="">...</a></li>
+            </ul>
+        </div>
+        <div class="mid">
+            <input type="text" class="search-input">
+            <div class="search-btn"></div>
+        </div>
+        <div class="right">
+            <ul class="right-links">
+                <li class="login"><a href="">登入</a></li>
+                <li class="sign_up"><a href="">註冊</a></li>
+            </ul>
+            <div class="user-icon"></div>
+        </div>
+    </header>
+    <!-- sidebar -->
+    <aside>
+        <div class="following-group">
+            <div class="following"></div>
+            <div class="following"></div>
+            <div class="following"></div>
+            <div class="following"></div>
+            <div class="following"></div>
+            <div class="following"></div>
+            <div class="following"></div>
+            <div class="following"></div>
+        </div>
+    </aside>
+    <main>
+        <div class="container">
+            <div class="gaming">
+                <h1>電競</h1>
+                <p class="gaming-description">
+                    即時賽況、賽事精華和您最愛的職業玩家都在這裡
+                </p>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="game-card">
+                            <div class="game-img"></div>
+                            <div class="game-info">
+                                <p class="game-name">APEX</p>
+                                <p class="viewers">觀眾人數：1,235</p>
+                            </div>
+                            <div class="live-block">
+                                <div class="live">LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-card">
+                            <div class="game-img"></div>
+                            <div class="game-info">
+                                <p class="game-name">APEX</p>
+                                <p class="viewers">觀眾人數：1,235</p>
+                            </div>
+                            <div class="live-block">
+                                <div class="live">LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-card">
+                            <div class="game-img"></div>
+                            <div class="game-info">
+                                <p class="game-name">APEX</p>
+                                <p class="viewers">觀眾人數：1,235</p>
+                            </div>
+                            <div class="live-block">
+                                <div class="live">LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-card">
+                            <div class="game-img"></div>
+                            <div class="game-info">
+                                <p class="game-name">APEX</p>
+                                <p class="viewers">觀眾人數：1,235</p>
+                            </div>
+                            <div class="live-block">
+                                <div class="live">LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-card">
+                            <div class="game-img"></div>
+                            <div class="game-info">
+                                <p class="game-name">APEX</p>
+                                <p class="viewers">觀眾人數：1,235</p>
+                            </div>
+                            <div class="live-block">
+                                <div class="live">LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-card">
+                            <div class="game-img"></div>
+                            <div class="game-info">
+                                <p class="game-name">APEX</p>
+                                <p class="viewers">觀眾人數：1,235</p>
+                            </div>
+                            <div class="live-block">
+                                <div class="live">LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-card">
+                            <div class="game-img"></div>
+                            <div class="game-info">
+                                <p class="game-name">APEX</p>
+                                <p class="viewers">觀眾人數：1,235</p>
+                            </div>
+                            <div class="live-block">
+                                <div class="live">LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-card">
+                            <div class="game-img"></div>
+                            <div class="game-info">
+                                <p class="game-name">APEX</p>
+                                <p class="viewers">觀眾人數：1,235</p>
+                            </div>
+                            <div class="live-block">
+                                <div class="live">LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-card">
+                            <div class="game-img"></div>
+                            <div class="game-info">
+                                <p class="game-name">APEX</p>
+                                <p class="viewers">觀眾人數：1,235</p>
+                            </div>
+                            <div class="live-block">
+                                <div class="live">LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-card">
+                            <div class="game-img"></div>
+                            <div class="game-info">
+                                <p class="game-name">APEX</p>
+                                <p class="viewers">觀眾人數：1,235</p>
+                            </div>
+                            <div class="live-block">
+                                <div class="live">LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-card">
+                            <div class="game-img"></div>
+                            <div class="game-info">
+                                <p class="game-name">APEX</p>
+                                <p class="viewers">觀眾人數：1,235</p>
+                            </div>
+                            <div class="live-block">
+                                <div class="live">LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-card">
+                            <div class="game-img"></div>
+                            <div class="game-info">
+                                <p class="game-name">APEX</p>
+                                <p class="viewers">觀眾人數：1,235</p>
+                            </div>
+                            <div class="live-block">
+                                <div class="live">LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-card">
+                            <div class="game-img"></div>
+                            <div class="game-info">
+                                <p class="game-name">APEX</p>
+                                <p class="viewers">觀眾人數：1,235</p>
+                            </div>
+                            <div class="live-block">
+                                <div class="live">LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+
+
+                </div>
+            </div>
+
+            <div class="streaming">
+                <h2>實況中的對戰</h2>
+                <p class="streaming-description">
+                    我們認為您會喜歡的最精彩 Live 比賽和對戰
+                </p>
+                <div class="stream-block">
+
+                    <div class="highlight">
+                        <div class="stream-card">
+                            <div class="thumbnail">
+                                <div class="live-block">
+                                    <div class="live">LIVE</div>
+                                </div>
+                                <div class="viewers">觀眾人數：2,358</div>
+                            </div>
+                            <div class="stream-info">
+                                <div class="streamer">
+                                    <div class="avatar"></div>
+                                    <div class="streamer-id">VALORANT</div>
+                                </div>
+                                <div class="stream-title">SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin - Group
+                                    Stage SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin - Group
+                                    Stage</div>
+                                <div class="stream-game">League of Legends • 法文</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row stream-group">
+                        <div class="col">
+                            <div class="stream-card">
+                                <div class="thumbnail">
+                                    <div class="live-block">
+                                        <div class="live">LIVE</div>
+                                    </div>
+                                    <div class="viewers">觀眾人數：2,358</div>
+                                </div>
+                                <div class="stream-info">
+                                    <div class="streamer">
+                                        <div class="avatar"></div>
+                                        <div class="streamer-id">VALORANT</div>
+                                    </div>
+                                    <div class="stream-title">SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin -
+                                        Group
+                                        Stage SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin - Group
+                                        Stage</div>
+                                    <div class="stream-game">League of Legends • 法文</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="stream-card">
+                                <div class="thumbnail">
+                                    <div class="live-block">
+                                        <div class="live">LIVE</div>
+                                    </div>
+                                    <div class="viewers">觀眾人數：2,358</div>
+                                </div>
+                                <div class="stream-info">
+                                    <div class="streamer">
+                                        <div class="avatar"></div>
+                                        <div class="streamer-id">VALORANT</div>
+                                    </div>
+                                    <div class="stream-title">SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin -
+                                        Group
+                                        Stage SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin - Group
+                                        Stage</div>
+                                    <div class="stream-game">League of Legends • 法文</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="stream-card">
+                                <div class="thumbnail">
+                                    <div class="live-block">
+                                        <div class="live">LIVE</div>
+                                    </div>
+                                    <div class="viewers">觀眾人數：2,358</div>
+                                </div>
+                                <div class="stream-info">
+                                    <div class="streamer">
+                                        <div class="avatar"></div>
+                                        <div class="streamer-id">VALORANT</div>
+                                    </div>
+                                    <div class="stream-title">SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin -
+                                        Group
+                                        Stage SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin - Group
+                                        Stage</div>
+                                    <div class="stream-game">League of Legends • 法文</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="stream-card">
+                                <div class="thumbnail">
+                                    <div class="live-block">
+                                        <div class="live">LIVE</div>
+                                    </div>
+                                    <div class="viewers">觀眾人數：2,358</div>
+                                </div>
+                                <div class="stream-info">
+                                    <div class="streamer">
+                                        <div class="avatar"></div>
+                                        <div class="streamer-id">VALORANT</div>
+                                    </div>
+                                    <div class="stream-title">SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin -
+                                        Group
+                                        Stage SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin - Group
+                                        Stage</div>
+                                    <div class="stream-game">League of Legends • 法文</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="stream-card">
+                                <div class="thumbnail">
+                                    <div class="live-block">
+                                        <div class="live">LIVE</div>
+                                    </div>
+                                    <div class="viewers">觀眾人數：2,358</div>
+                                </div>
+                                <div class="stream-info">
+                                    <div class="streamer">
+                                        <div class="avatar"></div>
+                                        <div class="streamer-id">VALORANT</div>
+                                    </div>
+                                    <div class="stream-title">SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin -
+                                        Group
+                                        Stage SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin - Group
+                                        Stage</div>
+                                    <div class="stream-game">League of Legends • 法文</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="stream-card">
+                                <div class="thumbnail">
+                                    <div class="live-block">
+                                        <div class="live">LIVE</div>
+                                    </div>
+                                    <div class="viewers">觀眾人數：2,358</div>
+                                </div>
+                                <div class="stream-info">
+                                    <div class="streamer">
+                                        <div class="avatar"></div>
+                                        <div class="streamer-id">VALORANT</div>
+                                    </div>
+                                    <div class="stream-title">SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin -
+                                        Group
+                                        Stage SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin - Group
+                                        Stage</div>
+                                    <div class="stream-game">League of Legends • 法文</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="stream-card">
+                                <div class="thumbnail">
+                                    <div class="live-block">
+                                        <div class="live">LIVE</div>
+                                    </div>
+                                    <div class="viewers">觀眾人數：2,358</div>
+                                </div>
+                                <div class="stream-info">
+                                    <div class="streamer">
+                                        <div class="avatar"></div>
+                                        <div class="streamer-id">VALORANT</div>
+                                    </div>
+                                    <div class="stream-title">SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin -
+                                        Group
+                                        Stage SuperMassive Blaze vs ACEND -VALORANT Masters: Berlin - Group
+                                        Stage</div>
+                                    <div class="stream-game">League of Legends • 法文</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                </div>
+            </div>
+    </main>
+</body>
+
+</html>
